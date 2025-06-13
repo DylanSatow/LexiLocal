@@ -83,7 +83,14 @@ LexiLocal is an advanced AI-powered application designed to analyze legal docume
 
 5. **Run the application:**
    ```bash
-   streamlit run app.py
+   # Option 1: Using make (recommended)
+   make run
+   
+   # Option 2: Using the startup script
+   python scripts/start_app.py
+   
+   # Option 3: Direct command with environment variables
+   STREAMLIT_SERVER_FILE_WATCHER_TYPE=none streamlit run app.py --server.headless true
    ```
 
 6. **Open your browser** and navigate to `http://localhost:8501`
@@ -357,6 +364,45 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Sentence Transformers** for embedding models
 - **FAISS** for efficient vector search
 - **Streamlit** for the beautiful UI framework
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+**Streamlit-PyTorch Compatibility Error:**
+```
+RuntimeError: Tried to instantiate class '__path__._path', but it does not exist!
+```
+**Solution:** Use the provided startup methods that disable the file watcher:
+```bash
+make run  # or
+python scripts/start_app.py
+```
+
+**Ollama Model Not Found:**
+```
+Error: model 'llama3.2:1b' not found
+```
+**Solution:** Download the model first:
+```bash
+ollama pull llama3.2:1b
+```
+
+**Port Already in Use:**
+```
+Port 8501 is already in use
+```
+**Solution:** Kill existing Streamlit processes:
+```bash
+pkill -f streamlit
+# Then restart the app
+make run
+```
+
+**Memory Issues:**
+- Use smaller models like `llama3.2:1b` instead of larger ones
+- Reduce `chunk_size` in configuration
+- Close other applications to free memory
 
 ## 📞 Support
 
