@@ -5,8 +5,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_ollama import OllamaLLM
 from langchain_core.runnables import RunnablePassthrough
-from document_processor import DocumentProcessor
-from mock_data import get_mock_dataset
+from .document_processor import DocumentProcessor
+from ..data.mock_data import get_mock_dataset
 
 class LegalRAGSystem:
     def __init__(self, 

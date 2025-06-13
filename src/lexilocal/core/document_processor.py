@@ -7,7 +7,7 @@ from sentence_transformers import SentenceTransformer
 import faiss
 import pickle
 import os
-from mock_data import get_mock_dataset
+from ..data.mock_data import get_mock_dataset
 
 class DocumentProcessor:
     def __init__(self, 

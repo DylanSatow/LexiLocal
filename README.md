@@ -181,14 +181,45 @@ The RAG (Retrieval-Augmented Generation) system follows this workflow:
 
 ```
 LexiLocal/
-├── app.py                  # Streamlit UI application
-├── rag_system.py          # RAG system implementation
-├── document_processor.py  # Document chunking and embedding
-├── mock_data.py           # Sample legal documents
-├── data_exploration.py    # Dataset analysis tools
-├── requirements.txt       # Python dependencies
-├── README.md             # This file
-└── venv/                 # Virtual environment
+├── src/
+│   └── lexilocal/
+│       ├── __init__.py            # Package initialization
+│       ├── core/                  # Core business logic
+│       │   ├── __init__.py
+│       │   ├── document_processor.py  # Document chunking & embeddings
+│       │   └── rag_system.py      # RAG pipeline implementation
+│       ├── data/                  # Data handling modules
+│       │   ├── __init__.py
+│       │   ├── dataset_loader.py  # Multi-source data loading
+│       │   ├── mock_data.py       # Sample legal documents
+│       │   └── data_exploration.py # Dataset analysis tools
+│       ├── ui/                    # User interface components
+│       │   ├── __init__.py
+│       │   └── streamlit_app.py   # Streamlit web application
+│       └── utils/                 # Utility modules
+│           ├── __init__.py
+│           ├── logging_config.py  # Centralized logging
+│           └── performance_metrics.py # Performance monitoring
+├── tests/                         # Test suite
+│   ├── __init__.py
+│   ├── test_document_processor.py
+│   └── test_rag_system.py
+├── scripts/                       # Utility scripts
+│   └── run_performance_test.py    # Performance benchmarking
+├── config/                        # Configuration management
+│   ├── __init__.py
+│   └── settings.py               # Application settings
+├── docs/                         # Documentation
+│   ├── ARCHITECTURE.md           # System architecture
+│   └── API.md                    # API documentation
+├── app.py                        # Main application entry point
+├── requirements.txt              # Production dependencies
+├── requirements-dev.txt          # Development dependencies
+├── pyproject.toml               # Modern Python packaging
+├── setup.py                     # Package setup script
+├── Makefile                     # Development commands
+├── Dockerfile                   # Container configuration
+└── README.md                    # Project documentation
 ```
 
 ### Key Technologies
@@ -200,17 +231,37 @@ LexiLocal/
 - **Streamlit**: Modern web UI framework
 - **HuggingFace**: Datasets and model ecosystem
 
-### Testing
+### Development Commands
 
 ```bash
-# Test document processor
-python document_processor.py
+# Setup development environment
+make dev-setup
 
-# Test RAG system
-python rag_system.py
+# Run tests
+make test
 
-# Test dataset exploration
-python data_exploration.py
+# Run with coverage
+make test-coverage
+
+# Code formatting and linting
+make format
+make lint
+make type-check
+
+# Run all quality checks
+make check
+
+# Run the application
+make run
+
+# Run performance tests
+make run-test
+
+# Build Docker image
+make docker-build
+
+# Run in Docker
+make docker-run
 ```
 
 ## 🚀 Future Enhancements
