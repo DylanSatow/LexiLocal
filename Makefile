@@ -57,7 +57,7 @@ clean:
 
 # Running
 run:
-	streamlit run app.py
+	STREAMLIT_SERVER_FILE_WATCHER_TYPE=none streamlit run app.py --server.headless true
 
 run-test:
 	python scripts/run_performance_test.py

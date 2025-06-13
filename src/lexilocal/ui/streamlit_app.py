@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 
+# Apply compatibility fixes before any other imports
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+
+from lexilocal.utils.streamlit_fixes import init_streamlit_compatibility
+init_streamlit_compatibility()
+
 import streamlit as st
 import os
 import tempfile
