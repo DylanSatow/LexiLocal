@@ -7,14 +7,26 @@ import numpy as np
 def explore_dataset():
     print("Loading HFforLegal/case-law dataset...")
     
-    # Load the dataset
-    dataset = load_dataset("HFforLegal/case-law", "default")
+    # Load a small subset for development
+    try:
+        dataset = load_dataset("HFforLegal/case-law", "default", split="train[:100]")
+        print("Loaded first 100 examples for development")
+    except:
+        print("Failed to load subset, trying full dataset...")
+        dataset = load_dataset("HFforLegal/case-law", "default")
     
     print(f"Dataset structure: {dataset}")
-    print(f"Train split size: {len(dataset['train'])}")
+    
+    # Handle different dataset formats
+    if hasattr(dataset, 'train'):
+        data = dataset['train']
+        print(f"Train split size: {len(data)}")
+    else:
+        data = dataset
+        print(f"Dataset size: {len(data)}")
     
     # Get first few examples
-    first_example = dataset['train'][0]
+    first_example = data[0]
     print("\nFirst example fields:")
     for key, value in first_example.items():
         if key == 'document':
@@ -25,8 +37,8 @@ def explore_dataset():
     # Analyze document lengths
     print("\nAnalyzing document lengths...")
     doc_lengths = []
-    for i in range(min(1000, len(dataset['train']))):  # Sample first 1000 documents
-        doc = dataset['train'][i]['document']
+    for i in range(min(1000, len(data))):  # Sample first 1000 documents
+        doc = data[i]['document']
         if doc:
             doc_lengths.append(len(doc))
     
@@ -39,7 +51,7 @@ def explore_dataset():
     print("\n" + "="*50)
     print("SAMPLE DOCUMENT:")
     print("="*50)
-    sample_doc = dataset['train'][0]
+    sample_doc = data[0]
     print(f"Title: {sample_doc['title']}")
     print(f"Citation: {sample_doc['citation']}")
     print(f"State: {sample_doc['state']}")
