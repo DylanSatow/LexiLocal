@@ -4,6 +4,7 @@ datasets
 langchain
 langchain-community
 langchain-core
+langchain-ollama
 langgraph
 sentence-transformers
 faiss-cpu

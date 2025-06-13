@@ -3,7 +3,7 @@
 from typing import List, Dict, Any
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_community.llms import Ollama
+from langchain_ollama import OllamaLLM
 from langchain_core.runnables import RunnablePassthrough
 from document_processor import DocumentProcessor
 from mock_data import get_mock_dataset
@@ -18,7 +18,7 @@ class LegalRAGSystem:
         
         # Initialize the LLM
         print(f"Initializing LLM: {model_name}")
-        self.llm = Ollama(model=model_name, temperature=0.1)
+        self.llm = OllamaLLM(model=model_name, temperature=0.1)
         
         # Initialize document processor
         print("Initializing document processor...")
